@@ -11,7 +11,7 @@ build_property.RootNamespace = FloorForce2
 build_property.ProjectDir = D:\Programming Workspace\VS_workspace\FloorForce2\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = D:\Programming Workspace\VS_workspace\FloorForce2
 build_property._RazorSourceGeneratorDebug = 
 
