@@ -1,9 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<MvcFloorContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("MvcFloorContext")));
+}
+else
+{
+    builder.Services.AddDbContext<MvcFloorContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionMvcFloorContext")));
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
+builder.Services.AddDbContext<MvcFloorContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MvcFloorContext") ?? throw new InvalidOperationException("Connection string 'MvcFloorContext' not found.")));
     
 var app = builder.Build();
 
