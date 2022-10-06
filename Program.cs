@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+// using FloorForce2.Data;
+using FloorForce2.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
@@ -21,6 +24,13 @@ builder.Services.AddDbContext<MvcFloorContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MvcFloorContext") ?? throw new InvalidOperationException("Connection string 'MvcFloorContext' not found.")));
     
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
